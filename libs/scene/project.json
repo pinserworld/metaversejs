@@ -1,0 +1,33 @@
+{
+  "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
+  "sourceRoot": "libs/scene/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/scene",
+        "main": "libs/scene/src/index.ts",
+        "tsConfig": "libs/scene/tsconfig.lib.json",
+        "assets": ["libs/scene/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/scene/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/scene"],
+      "options": {
+        "jestConfig": "libs/scene/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["library", "scene"]
+}

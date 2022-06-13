@@ -2,7 +2,8 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
+    "core": "libs/core",
     "demo": "apps/demo",
-    "demo-e2e": "apps/demo-e2e"
+    "scene": "libs/scene"
   }
 }

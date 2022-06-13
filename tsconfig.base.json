@@ -8,13 +8,16 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
+    "target": "es2017",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": ["es2019", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@metaversejs/core": ["libs/core/src/index.ts"],
+      "@metaversejs/scene": ["libs/scene/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
