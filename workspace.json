@@ -4,6 +4,8 @@
   "projects": {
     "core": "libs/core",
     "demo": "apps/demo",
+    "logo": "libs/logo",
+    "player": "libs/player",
     "scene": "libs/scene"
   }
 }

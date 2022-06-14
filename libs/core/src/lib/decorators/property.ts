@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { SinglePropertySchema } from 'aframe';
 import 'reflect-metadata';
 import { MetaElement } from '../classes/meta-element';
 
 export const property =
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (options?: { default: any }) =>
   <T extends MetaElement>(target: T, property: string) => {
     const type = Reflect.getMetadata('design:type', target, property);
@@ -19,7 +19,7 @@ export const property =
       ...(options?.default !== undefined
         ? {
             default:
-              type === Number || type === Boolean || type === 'string'
+              type === Number || type === Boolean || type === String
                 ? options.default
                 : JSON.stringify(options.default),
           }

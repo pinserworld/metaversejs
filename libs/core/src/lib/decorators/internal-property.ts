@@ -4,6 +4,12 @@ import { MetaElement } from '../classes/meta-element';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const NAF: any;
 
+interface Action {
+  timer: number;
+  properties: { [key: string]: string };
+}
+const actions = new Map<MetaElement, Action>();
+
 export const internalProperty =
   () => (target: MetaElement, property: string) => {
     if (!(target.constructor as typeof MetaElement).__INTERNAL_PROPERTIES__) {
@@ -37,11 +43,23 @@ export const internalProperty =
           return;
         }
 
-        this.el.setAttribute(
-          this.constructor.__ELEMENT_NAME__,
-          property,
-          JSON.stringify(value)
-        );
+        const action = actions.get(this) || {
+          timer: 0,
+          properties: [],
+        };
+
+        if (action.timer) {
+          clearTimeout(action.timer);
+        }
+
+        (action.properties as any)[property] = JSON.stringify(value);
+        action.timer = setTimeout(() => {
+          this.el.setAttribute(
+            this.constructor.__ELEMENT_NAME__,
+            action.properties
+          );
+          actions.delete(this);
+        }, 100) as unknown as number;
 
         if (
           this.constructor.__NETWORKED__ &&

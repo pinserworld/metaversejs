@@ -19,9 +19,14 @@ export class RootElement extends LitElement {
 
   render(): TemplateResult {
     return html`
-      <meta-scene connectOnLoad="true">
+      <meta-scene
+        app="ce40881f-8f50-43b7-a5bd-b27eb3b330bb"
+        room="84ccc65e-3601-4f5a-a5dc-34ebf5d2e9a9"
+        audio="true"
+      >
         <template slot="scene">
-          <tic-tac-toe position="0 0 -5"></tic-tac-toe>
+          <a-sky color="#EEEEEE"></a-sky>
+          <tic-tac-toe position="0 0 -10"></tic-tac-toe>
         </template>
       </meta-scene>
     `;
@@ -50,8 +55,8 @@ class TictactoeService extends MetaProvider {
       return;
     }
     pawns[line][column] = player;
-    this.pawns = pawns;
     this.player = player === 'X' ? 'O' : 'X';
+    this.pawns = pawns;
   }
 
   public reset() {
@@ -147,7 +152,7 @@ export class PawnElement extends MetaElement {
   positioncolumn!: number;
 
   @internalProperty()
-  background = 'grey';
+  backgroundcolor = 'grey';
 
   private onClick() {
     this.tictactoeService.add(this.positionline, this.positioncolumn);
@@ -161,10 +166,10 @@ export class PawnElement extends MetaElement {
       <a-box
         selectable
         scale="1 1 0.1"
-        material="color: ${this.background}"
+        material="color: ${this.backgroundcolor}"
         @click=${() => this.onClick()}
-        @mouseenter=${() => (this.background = '#AAAAAA')}
-        @mouseleave=${() => (this.background = 'grey')}
+        @mouseenter=${() => (this.backgroundcolor = '#AAAAAA')}
+        @mouseleave=${() => (this.backgroundcolor = 'grey')}
       ></a-box>
       <a-text value="${player}" position="-0.29 0 0.1" scale="3 3 1"></a-text>
     `;

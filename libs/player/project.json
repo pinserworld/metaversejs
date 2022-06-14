@@ -1,0 +1,33 @@
+{
+  "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
+  "sourceRoot": "libs/player/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/player",
+        "main": "libs/player/src/index.ts",
+        "tsConfig": "libs/player/tsconfig.lib.json",
+        "assets": ["libs/player/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/player/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/player"],
+      "options": {
+        "jestConfig": "libs/player/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["library", "player"]
+}
