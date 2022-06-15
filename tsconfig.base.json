@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@metaversejs/core": ["libs/core/src/index.ts"],
+      "@metaversejs/gltf": ["libs/gltf/src/index.ts"],
       "@metaversejs/logo": ["libs/logo/src/index.ts"],
       "@metaversejs/player": ["libs/player/src/index.ts"],
       "@metaversejs/scene": ["libs/scene/src/index.ts"]

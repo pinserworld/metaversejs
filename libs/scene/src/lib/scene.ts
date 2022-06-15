@@ -22,7 +22,7 @@ export class SceneElement extends LitElement {
   private audio = true;
 
   @property()
-  private video = true;
+  private video = false;
 
   @property()
   private debug = false;

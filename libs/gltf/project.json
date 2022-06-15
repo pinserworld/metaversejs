@@ -1,0 +1,33 @@
+{
+  "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
+  "sourceRoot": "libs/gltf/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/gltf",
+        "main": "libs/gltf/src/index.ts",
+        "tsConfig": "libs/gltf/tsconfig.lib.json",
+        "assets": ["libs/gltf/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/gltf/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/gltf"],
+      "options": {
+        "jestConfig": "libs/gltf/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["library", "gltf"]
+}

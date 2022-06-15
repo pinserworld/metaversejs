@@ -81,11 +81,6 @@ export class PlayerElement extends MetaElement {
             raycaster="objects: [selectable];"
             cursor="rayOrigin: mouse; fuse: false;"
           ></a-entity>
-
-          <a-menu-button
-            position="0.25 0.25 -1"
-            scale="1.5 1.5 1"
-          ></a-menu-button>
         </a-entity>
 
         ${!this.vrmode
