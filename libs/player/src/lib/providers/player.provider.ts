@@ -1,10 +1,15 @@
-import { injectable, internalProperty, MetaProvider } from '@metaversejs/core';
+import { injectable, MetaProvider } from '@metaversejs/core';
 
 @injectable()
 export class PlayerProvider extends MetaProvider {
-  @internalProperty()
-  position = '0 0 0';
-
-  @internalProperty()
-  rotation = '0 0 0';
+  teleport(position: string, rotation: string) {
+    this.el.dispatchEvent(
+      new CustomEvent('teleport', {
+        detail: {
+          position,
+          rotation,
+        },
+      })
+    );
+  }
 }

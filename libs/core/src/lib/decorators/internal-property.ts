@@ -1,4 +1,5 @@
 import { SinglePropertySchema } from 'aframe';
+import 'networked-aframe';
 import { MetaElement } from '../classes/meta-element';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
