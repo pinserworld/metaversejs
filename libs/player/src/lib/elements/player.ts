@@ -1,4 +1,6 @@
-import { customElement, MetaElement } from '@metaversejs/core';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { customElement, inject, MetaElement } from '@metaversejs/core';
+import { THREE } from 'aframe';
 import 'aframe-blink-controls';
 import 'aframe-extras';
 import 'aframe-physics-extras';
@@ -6,29 +8,55 @@ import 'aframe-physics-system/dist/aframe-physics-system.js';
 import { html, nothing, TemplateResult } from 'lit';
 import 'networked-aframe';
 import 'super-hands';
+import { EventTeleport } from '../interfaces/event-teleport';
+import { PlayerProvider } from '../providers/player.provider';
 import '../utils/Geometry.js';
 import './avatar';
 
 @customElement('meta-player')
 export class PlayerElement extends MetaElement {
+  @inject()
+  playerProvider!: PlayerProvider;
+
   private vrmode = false;
-  private entervr = () => {
+  private readonly entervr = () => {
     this.vrmode = true;
     this.requestUpdate();
   };
-  private exitvr = () => {
+  private readonly exitvr = () => {
     this.vrmode = false;
     this.requestUpdate();
+  };
+
+  private readonly teleport = ({ detail }: CustomEventInit<EventTeleport>) => {
+    const { position, rotation } = detail as EventTeleport;
+    console.log('teleport', detail);
+
+    const player = this.el.querySelector('[player]');
+    const camera = this.el.querySelector('[camera]');
+    const [rx, ry] = rotation.split(' ');
+
+    player?.setAttribute('position', position);
+
+    if (camera) {
+      camera.setAttribute('position', '0 1.6 0');
+      (camera as any).components['look-controls'].pitchObject.rotation.x = (
+        THREE as any
+      ).Math.degToRad(+rx);
+      (camera as any).components['look-controls'].yawObject.rotation.y = +ry;
+    }
   };
 
   override init(): void {
     this.el.sceneEl?.addEventListener('enter-vr', this.entervr);
     this.el.sceneEl?.addEventListener('exit-vr', this.exitvr);
+    this.playerProvider.el.addEventListener('teleport', this.teleport);
   }
 
   override remove(): void {
     this.el.sceneEl?.removeEventListener('enter-vr', this.entervr);
     this.el.sceneEl?.removeEventListener('exit-vr', this.exitvr);
+    this.playerProvider.el.removeEventListener('teleport', this.teleport);
   }
 
   override render(): TemplateResult {
@@ -66,11 +94,10 @@ export class PlayerElement extends MetaElement {
       </assets>
 
       <a-entity
-        id="player"
+        player
         networked="template: #player-template; attachTemplateToLocal: false;"
       >
         <a-entity
-          id="camera"
           position="0 1.6 0"
           camera="fov: 40; zoom: 1;"
           look-controls="reverseMouseDrag: true; touchEnabled: false; magicWindowTrackingEnabled: false;"

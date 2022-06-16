@@ -1,8 +1,7 @@
-import '@metaversejs/player';
 import 'aframe';
 import { html, LitElement, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import './scene-container';
 
 @customElement('meta-scene')
 export class SceneElement extends LitElement {
@@ -58,12 +57,6 @@ export class SceneElement extends LitElement {
     return this;
   }
 
-  private scene() {
-    return html`${unsafeHTML(
-      this.querySelector('[slot=scene]')?.innerHTML || ''
-    )}`;
-  }
-
   override render(): TemplateResult {
     return html`
       <a-scene
@@ -80,9 +73,7 @@ export class SceneElement extends LitElement {
           connectOnLoad: ${this.connectOnLoad};
         "
       >
-        <meta-player></meta-player>
-
-        ${this.scene()}
+        <meta-scene-container></meta-scene-container>
       </a-scene>
     `;
   }

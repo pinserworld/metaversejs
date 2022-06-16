@@ -1,5 +1,43 @@
 {
   "name": "@metaversejs/player",
-  "version": "0.0.1",
-  "type": "commonjs"
+  "version": "0.1.3",
+  "type": "commonjs",
+  "license": "MIT",
+  "homepage": "https://github.com/pinserworld/metaversejs",
+  "keywords": [
+    "metaverse",
+    "metaversejs",
+    "webxr",
+    "webgl",
+    "vr",
+    "ar",
+    "3d",
+    "aframe",
+    "three",
+    "threejs",
+    "player",
+    "avatar",
+    "camera"
+  ],
+  "repository": {
+    "url": "https://github.com/pinserworld/metaversejs.git",
+    "type": "git"
+  },
+  "author": {
+    "name": "Marc Buils",
+    "email": "marc.buils@pinser.agency",
+    "url": "https://www.pinser.agency"
+  },
+  "peerDependencies": {
+    "@metaversejs/core": "0.1.3",
+    "@types/aframe": "^1.2.0",
+    "aframe": "^1.3.0",
+    "lit": "^2.2.5",
+    "aframe-blink-controls": "^0.3.0",
+    "aframe-extras": "^6.1.1",
+    "aframe-physics-extras": "^0.1.3",
+    "aframe-physics-system": "n5ro/aframe-physics-system#59100ac83033cf337d26925de1f92854c2988b75",
+    "networked-aframe": "^0.9.1",
+    "super-hands": "^3.0.3"
+  }
 }

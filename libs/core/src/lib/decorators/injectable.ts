@@ -77,7 +77,7 @@ export const injectable =
       update: function (oldData: unknown): void {
         getInstance(this as Component).update(oldData);
         getInstance(this as Component).el.dispatchEvent(
-          new Event('__META_UPDATE__')
+          new CustomEvent('__META_UPDATE__')
         );
       },
     };
