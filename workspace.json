@@ -5,7 +5,6 @@
     "core": "libs/core",
     "demo": "apps/demo",
     "gltf": "libs/gltf",
-    "logo": "libs/logo",
     "player": "libs/player",
     "scene": "libs/scene"
   }
