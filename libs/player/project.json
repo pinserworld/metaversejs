@@ -10,8 +10,23 @@
         "outputPath": "dist/libs/player",
         "main": "libs/player/src/index.ts",
         "tsConfig": "libs/player/tsconfig.lib.json",
-        "assets": ["libs/player/*.md"]
+        "assets": [
+          "libs/player/*.md",
+          "libs/player/src/lib/utils/*.js"
+        ]
       }
+    },
+    "publish": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "node tools/scripts/publish.mjs player {args.ver} {args.tag}"
+      },
+      "dependsOn": [
+        {
+          "projects": "self",
+          "target": "build"
+        }
+      ]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
