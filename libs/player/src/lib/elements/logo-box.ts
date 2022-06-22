@@ -1,6 +1,10 @@
-import { customElement, MetaElement, property } from '@metaversejs/core';
-import 'aframe-rounded';
-import { html, TemplateResult } from 'lit';
+import {
+  customElement,
+  html,
+  MetaElement,
+  property,
+  TemplateResult,
+} from '@metaversejs/core';
 
 @customElement('meta-logo-box')
 export class BoxElement extends MetaElement {

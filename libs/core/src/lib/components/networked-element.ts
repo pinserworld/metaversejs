@@ -1,8 +1,7 @@
-import { registerComponent } from 'aframe';
-import 'networked-aframe';
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const NAF: any;
+
+const { registerComponent } = AFRAME;
 
 function getPathTo(element: Element, root: Element): string {
   if (element.id !== '') return 'id("' + element.id + '")';
@@ -69,7 +68,7 @@ registerComponent('networked-element', {
       );
       assets.appendChild(template);
 
-      NAF.schemas.add({
+      NAF?.schemas.add({
         template: `#${templateId}`,
         components: this.data.networkedElements,
       });

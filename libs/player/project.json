@@ -16,6 +16,23 @@
         ]
       }
     },
+    "build-es": {
+      "executor": "@nrwl/web:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "project": "libs/player/package.esm.json",
+        "outputPath": "dist/libs/player-es",
+        "compiler": "swc",
+        "entryFile": "libs/player/src/index.ts",
+        "tsConfig": "libs/player/tsconfig.lib.json",
+        "rollupConfig": ["libs/player/rollup.config.cjs"],
+        "assets": [{
+          "glob": "libs/player/*.md",
+          "input": ".",
+          "output": "."
+        }]
+      }
+    },
     "publish": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
@@ -25,6 +42,18 @@
         {
           "projects": "self",
           "target": "build"
+        }
+      ]
+    },
+    "publish-es": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "node tools/scripts/publish-es.mjs player {args.ver} {args.tag}"
+      },
+      "dependsOn": [
+        {
+          "projects": "self",
+          "target": "build-es"
         }
       ]
     },

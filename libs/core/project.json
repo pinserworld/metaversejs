@@ -13,6 +13,25 @@
         "assets": ["libs/core/*.md"]
       }
     },
+    "build-es": {
+      "executor": "@nrwl/web:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "project": "libs/core/package.esm.json",
+        "outputPath": "dist/libs/core-es",
+        "compiler": "swc",
+        "entryFile": "libs/core/src/index.esm.ts",
+        "tsConfig": "libs/core/tsconfig.lib.json",
+        "rollupConfig": ["libs/core/rollup.config.cjs"],
+        "assets": [
+          {
+            "glob": "libs/core/*.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
     "publish": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
@@ -22,6 +41,18 @@
         {
           "projects": "self",
           "target": "build"
+        }
+      ]
+    },
+    "publish-es": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "node tools/scripts/publish-es.mjs core {args.ver} {args.tag}"
+      },
+      "dependsOn": [
+        {
+          "projects": "self",
+          "target": "build-es"
         }
       ]
     },

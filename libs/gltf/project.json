@@ -13,6 +13,23 @@
         "assets": ["libs/gltf/*.md"]
       }
     },
+    "build-es": {
+      "executor": "@nrwl/web:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "project": "libs/gltf/package.esm.json",
+        "outputPath": "dist/libs/gltf-es",
+        "compiler": "swc",
+        "entryFile": "libs/gltf/src/index.ts",
+        "tsConfig": "libs/gltf/tsconfig.lib.json",
+        "rollupConfig": ["libs/gltf/rollup.config.cjs"],
+        "assets": [{
+          "glob": "libs/gltf/*.md",
+          "input": ".",
+          "output": "."
+        }]
+      }
+    },
     "publish": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
@@ -22,6 +39,18 @@
         {
           "projects": "self",
           "target": "build"
+        }
+      ]
+    },
+    "publish-es": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "node tools/scripts/publish-es.mjs gltf {args.ver} {args.tag}"
+      },
+      "dependsOn": [
+        {
+          "projects": "self",
+          "target": "build-es"
         }
       ]
     },

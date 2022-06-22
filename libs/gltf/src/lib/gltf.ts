@@ -1,6 +1,11 @@
-import { MetaElement, customElement, property } from '@metaversejs/core';
-import { Entity, THREE } from 'aframe';
-import { html, TemplateResult } from 'lit';
+import {
+  customElement,
+  Entity,
+  html,
+  MetaElement,
+  property,
+  TemplateResult,
+} from '@metaversejs/core';
 
 @customElement('meta-gltf')
 export class GltfElement extends MetaElement {
