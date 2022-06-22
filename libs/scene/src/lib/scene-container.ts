@@ -1,7 +1,5 @@
-import { customElement, MetaElement } from '@metaversejs/core';
+import { customElement, MetaElement, html, TemplateResult, unsafeHTML } from '@metaversejs/core';
 import { PlayerProvider } from '@metaversejs/player';
-import { html, TemplateResult } from 'lit';
-import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 @customElement('meta-scene-container', {
   providers: [PlayerProvider],

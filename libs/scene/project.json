@@ -13,6 +13,26 @@
         "assets": ["libs/scene/*.md"]
       }
     },
+    
+    "build-es": {
+      "executor": "@nrwl/web:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "project": "libs/scene/package.esm.json",
+        "outputPath": "dist/libs/scene-es",
+        "compiler": "swc",
+        "entryFile": "libs/scene/src/index.ts",
+        "tsConfig": "libs/scene/tsconfig.lib.json",
+        "rollupConfig": ["libs/scene/rollup.config.cjs"],
+        "assets": [
+          {
+            "glob": "libs/scene/*.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
     "publish": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
@@ -22,6 +42,18 @@
         {
           "projects": "self",
           "target": "build"
+        }
+      ]
+    },
+    "publish-es": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "node tools/scripts/publish-es.mjs scene {args.ver} {args.tag}"
+      },
+      "dependsOn": [
+        {
+          "projects": "self",
+          "target": "build-es"
         }
       ]
     },

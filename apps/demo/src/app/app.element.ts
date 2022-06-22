@@ -1,37 +1,16 @@
+import 'aframe';
 import {
   customElement,
+  html,
   inject,
   injectable,
   internalProperty,
   MetaElement,
   MetaProvider,
   property,
+  TemplateResult,
 } from '@metaversejs/core';
 import '@metaversejs/scene';
-import { html, LitElement, TemplateResult } from 'lit';
-import { customElement as customElementLit } from 'lit/decorators.js';
-
-@customElementLit('metaversejs-root')
-export class RootElement extends LitElement {
-  protected createRenderRoot(): Element | ShadowRoot {
-    return this;
-  }
-
-  render(): TemplateResult {
-    return html`
-      <meta-scene
-        app="ce40881f-8f50-43b7-a5bd-b27eb3b330bb"
-        room="84ccc65e-3601-4f5a-a5dc-34ebf5d2e9a9"
-        audio="true"
-      >
-        <template slot="scene">
-          <a-sky color="#EEEEEE"></a-sky>
-          <tic-tac-toe position="0 0 -10"></tic-tac-toe>
-        </template>
-      </meta-scene>
-    `;
-  }
-}
 
 @injectable({
   networked: true,

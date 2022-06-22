@@ -1,7 +1,7 @@
 {
-  "name": "@metaversejs/gltf",
+  "name": "@metaversejs/core-es",
   "version": "0.1.12",
-  "type": "commonjs",
+  "type": "module",
   "license": "MIT",
   "homepage": "https://github.com/pinserworld/metaversejs",
   "keywords": [
@@ -15,8 +15,7 @@
     "aframe",
     "three",
     "threejs",
-    "gltf",
-    "glb"
+    "core"
   ],
   "repository": {
     "url": "https://github.com/pinserworld/metaversejs.git",
@@ -27,10 +26,9 @@
     "email": "marc.buils@pinser.agency",
     "url": "https://www.pinser.agency"
   },
-  "peerDependencies": {
-    "@metaversejs/core": "0.1.12"
-  },
   "devDependencies": {
-    "@types/aframe": "^1.2.0"
+    "@types/aframe": "^1.2.0",
+    "lit": "^2.2.5",
+    "reflect-metadata": "^0.1.13"
   }
 }

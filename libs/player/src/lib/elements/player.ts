@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { customElement, inject, MetaElement } from '@metaversejs/core';
-import { THREE } from 'aframe';
+import {
+  customElement,
+  html,
+  inject,
+  MetaElement,
+  nothing,
+  TemplateResult,
+  THREE,
+} from '@metaversejs/core';
 import 'aframe-blink-controls';
-import 'aframe-extras';
-import 'aframe-physics-extras';
-import 'aframe-physics-system/dist/aframe-physics-system.js';
-import { html, nothing, TemplateResult } from 'lit';
-import 'networked-aframe';
 import 'super-hands';
 import { EventTeleport } from '../interfaces/event-teleport';
 import { PlayerProvider } from '../providers/player.provider';

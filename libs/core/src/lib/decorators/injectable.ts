@@ -1,6 +1,8 @@
-import { Component, registerComponent, THREE } from 'aframe';
+import { Component } from 'aframe';
 import { MetaProvider } from '../classes/meta-provider';
 import { providers } from '../stores/providers';
+
+const { registerComponent, THREE } = AFRAME;
 
 export const injectable =
   (_options?: { networked?: boolean }) =>

@@ -1,29 +1,42 @@
-import 'aframe';
-import { html, LitElement, TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import {
+  customLitElement,
+  html,
+  LitElement,
+  propertyLit,
+  TemplateResult,
+} from '@metaversejs/core';
+import 'aframe-extras';
+import 'aframe-physics-extras';
+import 'aframe-physics-system/dist/aframe-physics-system.js';
+import 'aframe-rounded';
+import { ifDefined } from 'lit-html/directives/if-defined.js';
+import 'networked-aframe';
 import './scene-container';
 
-@customElement('meta-scene')
+@customLitElement('meta-scene')
 export class SceneElement extends LitElement {
-  @property()
+  @propertyLit()
   private app!: string;
 
-  @property()
+  @propertyLit()
   private room!: string;
 
-  @property()
+  @propertyLit()
+  private embedded = false;
+
+  @propertyLit()
   private serverURL = 'https://pinser-networked-server.onrender.com';
 
-  @property()
+  @propertyLit()
   private adapter = 'easyrtc';
 
-  @property()
+  @propertyLit()
   private audio = true;
 
-  @property()
+  @propertyLit()
   private video = false;
 
-  @property()
+  @propertyLit()
   private debug = false;
 
   private connectOnLoad = false;
@@ -32,10 +45,11 @@ export class SceneElement extends LitElement {
     super.connectedCallback();
 
     if (
-      !this.app ||
-      !/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/.test(
-        this.app.toUpperCase()
-      )
+      (!this.app && this.room) ||
+      (this.app &&
+        !/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/.test(
+          this.app.toUpperCase()
+        ))
     ) {
       throw new Error('meta-scene: property "app" unset or not valide');
     }
@@ -60,9 +74,13 @@ export class SceneElement extends LitElement {
   override render(): TemplateResult {
     return html`
       <a-scene
+        debug=${ifDefined(this.debug)}
+        embedded=${ifDefined(this.embedded ? true : undefined)}
         networked-scene="
           serverURL: ${this.serverURL};
-          app: ${this.app.replace(/-/g, '').toLowerCase()};
+          app: ${this.app
+          ? this.app.replace(/-/g, '').toLowerCase()
+          : 'default'};
           room: ${this.room
           ? this.room.replace(/-/g, '').toLowerCase()
           : 'default'};
