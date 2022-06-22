@@ -1,6 +1,5 @@
-import { customElement, MetaElement } from '@metaversejs/core';
+import { customElement, html, MetaElement } from '@metaversejs/core';
 import './logo';
-import { html } from 'lit';
 
 @customElement('meta-avatar')
 export class AvatarElement extends MetaElement {

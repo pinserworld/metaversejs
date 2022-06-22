@@ -1,13 +1,10 @@
-import {
-  Component,
-  registerComponent,
-  registerPrimitive,
-  SinglePropertySchema,
-} from 'aframe';
+import { Component, SinglePropertySchema } from 'aframe';
 import { MetaElement } from '../classes/meta-element';
 import { MetaProvider } from '../classes/meta-provider';
 import '../components/networked-element';
 import { providers } from '../stores/providers';
+
+const { registerComponent, registerPrimitive } = AFRAME;
 
 export const customElement =
   <P extends typeof MetaProvider>(

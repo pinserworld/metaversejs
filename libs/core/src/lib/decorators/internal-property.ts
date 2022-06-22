@@ -1,5 +1,4 @@
 import { SinglePropertySchema } from 'aframe';
-import 'networked-aframe';
 import { MetaElement } from '../classes/meta-element';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -63,6 +62,7 @@ export const internalProperty =
         }, 100) as unknown as number;
 
         if (
+          NAF &&
           this.constructor.__NETWORKED__ &&
           NAF.connection.isConnected() &&
           !NAF.utils.isMine(this.el)

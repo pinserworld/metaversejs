@@ -1,5 +1,9 @@
-import { customElement, MetaElement } from '@metaversejs/core';
-import { html, TemplateResult } from 'lit';
+import {
+  customElement,
+  html,
+  MetaElement,
+  TemplateResult,
+} from '@metaversejs/core';
 import './logo-box';
 
 @customElement('meta-logo')
