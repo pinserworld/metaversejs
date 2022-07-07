@@ -1,94 +1,150 @@
+# @metaversejs
 
+metaversejs is a library inspired from the very nice library [Polymer lit](https://lit.dev/) to map [A-Frame](https://aframe.io/) AR / VR / 3D elements on typescript classes like Angular/React/Lit.  
+You can create simple, fast and reactive WebXR 3D / AR and VR scenes with all modern web development good practices.
 
-# Metaversejs
+**[Get started !](./docs/get-started.md)**
 
-This project was generated using [Nx](https://nx.dev).
+## Installation
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+Use the package manager [npm](https://www.npmjs.com/package/@metaverse/core) to install aframe-element.
 
-🔎 **Smart, Fast and Extensible Build System**
+```bash
+npm install @metapins/core @metapins/scene @metapins/player
+```
 
-## Adding capabilities to your workspace
+## Usage
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+### By component
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+```typescript
+import { customElement, MetaElement, html } from '@metaversejs/core';
 
-Below are our core plugins:
+@customElement('my-3d-element')
+exports My3dElement extends MetaElement {
+  render() {
+    return html`
+      <a-entity text="value: Hello World;"></a-entity>
+    `;
+  }
+}
+```
 
-- [React](https://reactjs.org)
-  - `npm install --save-dev @nrwl/react`
-- Web (no framework frontends)
-  - `npm install --save-dev @nrwl/web`
-- [Angular](https://angular.io)
-  - `npm install --save-dev @nrwl/angular`
-- [Nest](https://nestjs.com)
-  - `npm install --save-dev @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `npm install --save-dev @nrwl/express`
-- [Node](https://nodejs.org)
-  - `npm install --save-dev @nrwl/node`
+```html
+<meta-scene>
+  <template slot="scene">
+    <my-3d-element></my-3d-element>
+  </template>
+</meta-scene>
+```
 
-There are also many [community plugins](https://nx.dev/community) you could add.
+### With parameters
 
-## Generate an application
+```typescript
+import { customElement, MetaElement, html } from '@metaversejs/core';
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+@customElement('my-text-element')
+exports MyTextElement extends MetaElement {
+  @property()
+  text: string;
 
-> You can use any of the plugins above to generate applications as well.
+  render() {
+    return html`
+      <a-entity text="value: ${this.text};"></a-entity>
+    `;
+  }
+}
+```
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+```html
+<meta-scene>
+  <template slot="scene">
+    <my-text-element text="Hello World"></my-text-element>
+  </template>
+</meta-scene>
+```
 
-## Generate a library
+### By attribute
 
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
+```typescript
+import { customElement, MetaElement, html } from '@metaversejs/core';
 
-> You can also use any of the plugins above to generate libraries as well.
+@customElement('my-text-element')
+exports MyTextElement extends MetaElement {
+  @property()
+  text: string;
 
-Libraries are shareable across libraries and applications. They can be imported from `@metaversejs/mylib`.
+  render() {
+    return html`
+      <a-entity text="value: ${this.data.text};"></a-entity>
+    `;
+  }
+}
+```
 
-## Development server
+```html
+<meta-scene>
+  <template slot="scene">
+    <a-entity my-text-element="text: Hello World;"></a-entity>
+  </template>
+</meta-scene>
+```
 
-Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+### With an aframe hook
 
-## Code scaffolding
+```typescript
+import { customElement, MetaElement, html } from '@metaversejs/core';
 
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
+@customElement('my-3d-element')
+exports My3dElement extends MetaElement {
+  init() {
+    console.log('component initilized', this.el);
+  }
 
-## Build
+  render() {
+    return html`
+      <a-entity text="value: Hello World;"></a-entity>
+    `;
+  }
+}
+```
 
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```html
+<meta-scene>
+  <template slot="scene">
+    <my-3d-element></my-3d-element>
+  </template>
+</meta-scene>
+```
 
-## Running unit tests
+## Documentation
 
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
+- [Get started](./docs/get-started.md)
 
-Run `nx affected:test` to execute the unit tests affected by a change.
+## Example
 
-## Running end-to-end tests
+### Tictactoe
+- Demo: https://metaversejs-demo.herokuapp.com/
+- Source code: https://github.com/pinserworkd/metaversejs/blob/master/apps/demo/src/app/app.element.ts
 
-Run `nx e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
+_Tips: You can open 2 tabs on the same browser to test multiplayer mode._
 
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
+![metaversejs example tictactoe](./docs/assets/example-tictactoe.png)
 
-## Understand your workspace
+### Pinser storybook
 
-Run `nx graph` to see a diagram of the dependencies of your projects.
+- Demo: https://pinser-widgets-storybook.onrender.com/
 
-## Further help
+The owner of the multiplayer game is the first to open the link (player yellow). Next users to open the demo are red.
 
-Visit the [Nx Documentation](https://nx.dev) to learn more.
+![Pinser storybook examples](./docs/assets/pinser-storybook.png)
 
+## Contributing
 
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-## ☁ Nx Cloud
+Please make sure to update tests as appropriate.
 
-### Distributed Computation Caching & Distributed Task Execution
+## License
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
+[MIT](https://choosealicense.com/licenses/mit/)

@@ -1,6 +1,6 @@
 {
   "name": "@metaversejs/scene",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "type": "commonjs",
   "license": "MIT",
   "homepage": "https://github.com/pinserworld/metaversejs",
@@ -27,8 +27,8 @@
     "url": "https://www.pinser.agency"
   },
   "peerDependencies": {
-    "@metaversejs/core": "0.1.12",
-    "@metaversejs/player": "0.1.12"
+    "@metaversejs/core": "0.1.13",
+    "@metaversejs/player": "0.1.13"
   },
   "devDependencies": {
     "@types/aframe": "^1.2.0",

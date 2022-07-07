@@ -32,7 +32,6 @@ export class PlayerElement extends MetaElement {
 
   private readonly teleport = ({ detail }: CustomEventInit<EventTeleport>) => {
     const { position, rotation } = detail as EventTeleport;
-    console.log('teleport', detail);
 
     const player = this.el.querySelector('[player]');
     const camera = this.el.querySelector('[camera]');
@@ -121,7 +120,7 @@ export class PlayerElement extends MetaElement {
                 static-body="shape: sphere; sphereRadius: 0.02"
                 hand-controls="hand: left"
                 laser-controls="hand: left;"
-                blink-controls="cameraRig: #player; teleportOrigin: #camera; collisionEntities: [teleportable]; snapTurn: false;"
+                blink-controls="cameraRig: [player]; teleportOrigin: [camera]; collisionEntities: [teleportable]; snapTurn: false;"
                 raycaster="objects: [selectable];"
                 networked="template: #left-hand-template; attachTemplateToLocal: false;"
               ></a-entity>
@@ -131,7 +130,7 @@ export class PlayerElement extends MetaElement {
                 static-body="shape: sphere; sphereRadius: 0.02"
                 hand-controls="hand: right"
                 laser-controls="hand: right;"
-                blink-controls="cameraRig: #player; teleportOrigin: #camera; collisionEntities: [teleportable]; snapTurn: false;"
+                blink-controls="cameraRig: [player]; teleportOrigin: [camera]; collisionEntities: [teleportable]; snapTurn: false;"
                 raycaster="objects: [selectable];"
                 networked="template: #right-hand-template; attachTemplateToLocal: false;"
               ></a-entity>
